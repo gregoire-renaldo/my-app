@@ -1,0 +1,15 @@
+<h1>Places#index</h1>
+<p>Find me in app/views/places/index.html.erb</p>
+
+<ul>
+  <% @places.each do |place| %>
+  <li>
+    <%= image_tag "avatar_by_default.png" %>
+    <%= link_to "#{place.name}", place_path(place) %>
+    <%= place.name  %>
+    <%= place.address  %>
+    <%= place.user.firstname  %>
+    <%= place.user.lastname %>
+  </li>
+      <% end %>
+</ul>

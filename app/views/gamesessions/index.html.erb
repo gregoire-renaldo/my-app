@@ -1,2 +1,19 @@
 <h1>Gamesessions#index</h1>
 <p>Find me in app/views/gamesessions/index.html.erb</p>
+
+<%# current_user gamesessions %>
+
+
+<ul>
+  <% @gamesessions.each do |gamesessions| %>
+  <li>
+    <%= image_tag "avatar_by_default.png" %>
+    <%= @gamesession.startTime %>
+    <%= @gamesession.endTime  %>
+    <%= @gamesession.gameorganizer %>
+    <%= @gamesession.user %>
+    <%= @gamesession.place %>
+
+  </li>
+      <% end %>
+</ul>

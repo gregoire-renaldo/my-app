@@ -1,6 +1,6 @@
-class PlacesController < ApplicationController
+class GamesessionsController < ApplicationController
   def index
-    @places = Place.all
+    @gamesessions = Gamesession.all
   end
 
   def show

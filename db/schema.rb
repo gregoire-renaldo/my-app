@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_124615) do
+ActiveRecord::Schema.define(version: 2020_05_09_125156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name"
+    t.string "edition"
+    t.string "cmc"
+    t.string "legality"
+    t.string "color"
+    t.integer "price"
+    t.bigint "deck_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deck_id"], name: "index_cards_on_deck_id"
+  end
 
   create_table "decks", force: :cascade do |t|
     t.string "name"
@@ -34,6 +47,12 @@ ActiveRecord::Schema.define(version: 2020_05_09_124615) do
     t.index ["user_id"], name: "index_places_on_user_id"
   end
 
+  create_table "rounds", force: :cascade do |t|
+    t.string "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -50,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_124615) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "decks"
   add_foreign_key "decks", "users"
   add_foreign_key "places", "users"
 end

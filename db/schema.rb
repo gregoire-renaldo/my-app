@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_131106) do
+ActiveRecord::Schema.define(version: 2020_05_10_135322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,10 @@ ActiveRecord::Schema.define(version: 2020_05_09_131106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "gameorganizer_id", null: false
+    t.bigint "round_id", null: false
     t.index ["gameorganizer_id"], name: "index_gamesessions_on_gameorganizer_id"
     t.index ["place_id"], name: "index_gamesessions_on_place_id"
+    t.index ["round_id"], name: "index_gamesessions_on_round_id"
     t.index ["user_id"], name: "index_gamesessions_on_user_id"
   end
 
@@ -107,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_131106) do
   add_foreign_key "gameorganizers", "users"
   add_foreign_key "gamesessions", "gameorganizers"
   add_foreign_key "gamesessions", "places"
+  add_foreign_key "gamesessions", "rounds"
   add_foreign_key "gamesessions", "users"
   add_foreign_key "places", "users"
   add_foreign_key "winners", "gamesessions"

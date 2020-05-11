@@ -22,19 +22,21 @@ list.each do |num|
       username: Faker::GreekPhilosophers.name,
       firstname:   Faker::Name.first_name,
       lastname: Faker::Name.last_name,
+      bio: "a user bio"
     )
     user.save!
 end
 puts 'Finished!'
 
 puts 'Creating 50 fake places...'
-100.times do
+75.times do
   place = Place.new(
     name: Faker::Games::Witcher.location,
     address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
     available: true,
-    user_id: rand(0..50),
+    user_id: rand(1..50),
   )
   place.save!
 end
+
 puts 'Finished!'

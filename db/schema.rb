@@ -10,10 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_143034) do
+ActiveRecord::Schema.define(version: 2020_05_10_135322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name"
+    t.string "edition"
+    t.string "cmc"
+    t.string "legality"
+    t.string "color"
+    t.integer "price"
+    t.bigint "deck_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deck_id"], name: "index_cards_on_deck_id"
+  end
+
+  create_table "decks", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "gameorganizers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "gamesession_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gamesession_id"], name: "index_gameorganizers_on_gamesession_id"
+    t.index ["user_id"], name: "index_gameorganizers_on_user_id"
+  end
+
+  create_table "gamesessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "place_id", null: false
+    t.datetime "startTime"
+    t.datetime "endTime"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "gameorganizer_id", null: false
+    t.bigint "round_id", null: false
+    t.index ["gameorganizer_id"], name: "index_gamesessions_on_gameorganizer_id"
+    t.index ["place_id"], name: "index_gamesessions_on_place_id"
+    t.index ["round_id"], name: "index_gamesessions_on_round_id"
+    t.index ["user_id"], name: "index_gamesessions_on_user_id"
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "address"
+    t.boolean "available"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_places_on_user_id"
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.string "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +85,33 @@ ActiveRecord::Schema.define(version: 2020_04_24_143034) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "lastname"
+    t.string "firstname"
+    t.text "bio"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "winners", force: :cascade do |t|
+    t.integer "points"
+    t.bigint "gamesession_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gamesession_id"], name: "index_winners_on_gamesession_id"
+    t.index ["user_id"], name: "index_winners_on_user_id"
+  end
+
+  add_foreign_key "cards", "decks"
+  add_foreign_key "decks", "users"
+  add_foreign_key "gameorganizers", "gamesessions"
+  add_foreign_key "gameorganizers", "users"
+  add_foreign_key "gamesessions", "gameorganizers"
+  add_foreign_key "gamesessions", "places"
+  add_foreign_key "gamesessions", "rounds"
+  add_foreign_key "gamesessions", "users"
+  add_foreign_key "places", "users"
+  add_foreign_key "winners", "gamesessions"
+  add_foreign_key "winners", "users"
 end

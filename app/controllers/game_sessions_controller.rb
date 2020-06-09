@@ -6,7 +6,7 @@ before_action :authenticate_user!, except: :show
   end
 
   def show
-    # find_gamesession
+    find_gamesession
   end
 
   def new
@@ -28,7 +28,7 @@ before_action :authenticate_user!, except: :show
 
 
   def edit
-    # find_gamesession
+    find_gamesession
   end
 
   def update
@@ -43,8 +43,8 @@ before_action :authenticate_user!, except: :show
     params.require(:game_session).permit(:name, :start_time, :end_time, :min_players, :max_player, :description, :game_id)
   end
 
-  # def find_gamesession
-  #   @gamesession = Gamesession.find(params[:id])
-  # end
+  def find_gamesession
+    @gamesession = GameSession.find(params[:id])
+  end
 
 end

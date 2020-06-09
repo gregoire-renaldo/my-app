@@ -1,2 +1,8 @@
 <h1>GameSessions#index</h1>
 <p>Find me in app/views/game_sessions/index.html.erb</p>
+<% @gamesessions.each do |gamesession| %>
+ <p> <h2>title: <%=gamesession.name %></h2>  </p>
+ <p>description: <%= gamesession.description %> </p>
+ <p>start_time: <%= gamesession.start_time %> </p>
+ <p>end_time: <%= gamesession.end_time %> </p>
+<% end  %>

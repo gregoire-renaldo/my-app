@@ -29,12 +29,12 @@ class GameSessionsController < ApplicationController
 
   private
 
-  def gamesession_params
-    params.require(:gamesession).permit(:start_time, :end_time, :min_players, :max_player, :description)
-  end
+  # def gamesession_params
+  #   params.require(:gamesession).permit(:start_time, :end_time, :min_players, :max_player, :description)
+  # end
 
-  def find_gamesession
-    @gamesession = Gamesession.find(params[:id])
-  end
+  # def find_gamesession
+  #   @gamesession = Gamesession.find(params[:id])
+  # end
 
 end

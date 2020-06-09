@@ -45,6 +45,7 @@ brawl.save!
 puts 'Creating 30 gamesessions...'
 30.times do
   gamesessions = GameSession.new(
+    name: Faker::Book.title,
     user_id: rand(1..50),
     start_time: Faker::Date.between(from: 2.days.ago, to: Date.today),
     end_time: Faker::Date.forward(days: 10),

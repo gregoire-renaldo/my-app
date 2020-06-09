@@ -43,7 +43,7 @@ brawl.save!
 
 
 puts 'Creating 30 gamesessions...'
-30.times do
+20.times do
   gamesessions = GameSession.new(
     name: Faker::Book.title,
     user_id: rand(1..50),
@@ -57,3 +57,21 @@ puts 'Creating 30 gamesessions...'
   gamesessions.save!
 end
 puts 'Finished!'
+
+
+puts 'creating players for gamesessions...'
+all_the_gamesessions = GameSession.all
+all_the_gamesessions.each do |session|
+    rand(2..4).times do
+      player = Player.new(
+        user_id: rand(1..50),
+        game_session_id: rand(1..20),
+      )
+      player.save!
+    end
+  end
+
+puts 'Finished'
+
+
+# pour chaque session de jeu, creer aletoirement entre 2 et 3 joueurs

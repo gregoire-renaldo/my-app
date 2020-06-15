@@ -40,7 +40,7 @@ before_action :authenticate_user!, except: :show
   private
 
   def gamesession_params
-    params.require(:game_session).permit(:name, :start_time, :end_time, :min_players, :max_player, :description, :game_id)
+    params.require(:game_session).permit(:name, :start_time, :end_time, :min_players, :max_players, :description, :game_id)
   end
 
   def find_gamesession

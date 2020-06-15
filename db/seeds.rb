@@ -20,7 +20,7 @@ list.each do |num|
     user = User.new(
       email:"#{num}@gmail.com",
       password: 'azerty',
-      username: Faker::GreekPhilosophers.name,
+      username: Faker::Superhero.unique.name,
       first_name:   Faker::Name.first_name,
       last_name: Faker::Name.last_name,
     )
@@ -59,6 +59,7 @@ end
 puts 'Finished!'
 
 
+# pour chaque session de jeu, creer aletoirement entre 2 et 4 joueurs
 puts 'creating players for gamesessions...'
 all_the_gamesessions = GameSession.all
 all_the_gamesessions.each do |session|
@@ -74,4 +75,3 @@ all_the_gamesessions.each do |session|
 puts 'Finished'
 
 
-# pour chaque session de jeu, creer aletoirement entre 2 et 3 joueurs

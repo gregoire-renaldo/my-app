@@ -11,4 +11,5 @@
 <p>players <% @gamesession.players.each do |player| %>
 <%=  player.user.username%>
 <% end %>
+<%= link_to 'Join the game', new_game_session_player_path(@gamesession) %>
 </div>

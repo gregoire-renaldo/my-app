@@ -1,2 +1,11 @@
 <h1>Players#new</h1>
 <p>Find me in app/views/players/new.html.erb</p>
+
+<%= @gamesession.id   %>
+<%= current_user.id  %>
+
+<%= simple_form_for [@gamesession, @player ] do |f| %>
+<%= f.hidden_field :game_session_id  %>
+  <%= f.submit "Join the game", class: "btn btn-primary" %>
+<% end %>
+

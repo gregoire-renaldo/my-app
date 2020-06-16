@@ -11,7 +11,7 @@
       <%= f.input :start_time, required: true %>
       <%= f.input :end_time, required: true %>
       <%= f.input :min_players, required: true, label: 'Min players (2)', input_html: { value: "2" }%>
-      <%= f.input :max_players, required: true, label:'Max players (10)', input_html: { value: "4" }%>
+      <%= f.input :max_players, required: true, label:'Max players (10)'%>
       <%= f.input :description %>
       <%= f.submit "Create a Game session", class: "btn btn-dark" %>
       <%= link_to "Cancel", game_sessions_path, class: "btn btn-dark" %>

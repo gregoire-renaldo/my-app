@@ -6,6 +6,12 @@
 
 <%= simple_form_for [@gamesession, @player ] do |f| %>
 <%= f.hidden_field :game_session_id  %>
-  <%= f.submit "Join the game", class: "btn btn-primary" %>
+<%= f.submit "Join the game", class: "btn btn-primary" %>
+<% end %>
+
+<% if @player.errors.full_messages.any? %>
+  <% @player.errors.full_messages.each do |error_message| %>
+    <%= error_message if @player.errors.full_messages.first == error_message %> <br />
+  <% end %>
 <% end %>
 

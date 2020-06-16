@@ -1,6 +1,7 @@
 class GameSessionsController < ApplicationController
 before_action :authenticate_user!, except: :show
 
+
   def index
     @gamesessions = GameSession.all
   end
@@ -32,9 +33,25 @@ before_action :authenticate_user!, except: :show
   end
 
   def update
+    find_gamesession
+    if @gamesession.user_id == current_user.id
+      @gamesession.update(gamesession_params)
+      redirect_to game_sessions_path
+    else
+      render :edit
+    end
   end
 
   def destroy
+    find_gamesession
+    if @gamesession.user_id == current_user.id
+      @gamesession.destroy
+      redirect_to game_sessions_path
+    else
+      render :edit
+    end
+    # no need for app/views/restaurants/destroy.html.erb
+
   end
 
   private

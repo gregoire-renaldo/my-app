@@ -6,7 +6,7 @@ class GameSession < ApplicationRecord
   validates :min_players, inclusion: 2..10
 
   validates :max_players, numericality:  { only_integer: true }
-  validates :max_players, numericality: {less_than_or_equal_to: :min_players}
+  validates :max_players, numericality: {more_than_or_equal_to: :min_players}
 
 
 end

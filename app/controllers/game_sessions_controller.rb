@@ -21,6 +21,8 @@ before_action :authenticate_user!, except: :show
     # @gamesession.photo.attach(io: params[:gamesession][:photo], filename: "photo.jpg", content_type: "image/jpg")
     @gamesession.user = current_user
     if @gamesession.save
+      owner_player = Player.new(game_session_id: @gamesession.id, user_id: current_user.id)
+      owner_player.save
       redirect_to game_sessions_path(@gamesession)
     else
       render :new

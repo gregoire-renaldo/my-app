@@ -1,2 +1,26 @@
 <h1>GameSessions#edit</h1>
 <p>Find me in app/views/game_sessions/edit.html.erb</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <%= simple_form_for [@gamesession] do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.input :game_id, required: true, as: :radio_buttons, collection: [['1', 'Commander'], ['2', 'Brawl']], label_method: :second, value_method: :first  %>
+      <%= f.input :start_time, required: true %>
+      <%= f.input :end_time, required: true %>
+      <%= f.input :min_players, required: true, label: 'Min players (2)', input_html: { value: "2" }%>
+      <%= f.input :max_players, required: true, label:'Max players (10)'%>
+      <%= f.input :description %>
+      <%= f.submit "Update a Game session", class: "btn btn-dark" %>
+      <% if current_user.id == @gamesession.user_id  %>
+      <%= link_to "Delete #{@gamesession.name}",
+            game_session_path(@gamesession),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+            <% end %>
+      <%= link_to "Back to all game sessions", game_sessions_path(@gamesession), class: "btn btn-dark" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <h1>GameSessions#index</h1>
 <p>Find me in app/views/game_sessions/index.html.erb</p>
-<% @gamesessions.each do |gamesession| %>
+<% @gamesessions.sort_by(&:start_time).each do |gamesession| %>
     <%= link_to game_session_path(gamesession) do %>
     <p> <h2>title: <%=gamesession.name %></h2>  </p>
     <%end %>

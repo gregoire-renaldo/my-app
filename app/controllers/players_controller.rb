@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+
   def index
   end
 
@@ -19,6 +20,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params)
     @gamesession = GameSession.find(params[:game_session_id])
     @player.game_session = @gamesession
+    #pour ne se connecter qu'une seule fois à la session de jeu
     @player.user_id = current_user.id
     if @player.save
       redirect_to game_session_path(@gamesession)
@@ -27,13 +29,19 @@ class PlayersController < ApplicationController
     end
   end
 
+
+
   def edit
   end
 
   def update
   end
 
-  def delete
+  def destroy
+    @player = Player.find(params[:id])
+    @gamesession = @player.game_session
+    @player.destroy
+    redirect_to game_session_path(@gamesession)
   end
 
   private
@@ -41,4 +49,5 @@ class PlayersController < ApplicationController
   def player_params
     params.require(:player).permit(:gamesession_id, :user_id)
   end
+
 end

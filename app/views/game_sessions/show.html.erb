@@ -2,6 +2,7 @@
 <p>Find me in app/views/game_sessions/show.html.erb</p>
 <div>
   <p> <h2>title: <%=@gamesession.name %></h2>  </p>
+  <p>game session id: <%= @gamesession.id %> </p>
   <p>created by: <%= @gamesession.user.username %> </p>
   <p>description: <%= @gamesession.description %> </p>
   <p>start_time: <%= @gamesession.start_time %> </p>
@@ -10,6 +11,16 @@
   <p>max_player: <%= @gamesession.max_players %> </p>
   <p>players <% @gamesession.players.each do |player| %>
     <%=  player.user.username%>
+    <%=  player.id%>
+    <% @player = player %>
+      <% if @player.user_id == current_user.id%>
+  <ul>
+    <li><%= link_to "Cancel participation (#{@player.id})",
+            player_path(@player),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %> </li>
+      <% end %>
+  </ul>
   <% end %>
   <ul>
     <li><%= link_to 'Join the game', new_game_session_player_path(@gamesession) %></li>
@@ -17,3 +28,4 @@
     <li><%= link_to 'Edit the game session', edit_game_session_path %></li>
   </ul>
 </div>
+<%# /game_sessions/:game_session_id/players/:id(.:format) %>

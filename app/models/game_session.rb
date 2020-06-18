@@ -1,7 +1,7 @@
 class GameSession < ApplicationRecord
   belongs_to :user
-  belongs_to :game
   has_many :players, dependent: :destroy
+  belongs_to :game
   validates :min_players, numericality:  { only_integer: true }
   validates :min_players, inclusion: 2..10
 

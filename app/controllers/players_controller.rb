@@ -1,4 +1,5 @@
 class PlayersController < ApplicationController
+
   def index
   end
 
@@ -36,7 +37,11 @@ class PlayersController < ApplicationController
   def update
   end
 
-  def delete
+  def destroy
+    @player = Player.find(params[:id])
+    @gamesession = @player.game_session
+    @player.destroy
+    redirect_to game_session_path(@gamesession)
   end
 
   private
@@ -44,4 +49,5 @@ class PlayersController < ApplicationController
   def player_params
     params.require(:player).permit(:gamesession_id, :user_id)
   end
+
 end

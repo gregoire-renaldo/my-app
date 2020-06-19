@@ -7,8 +7,8 @@
       <%= simple_form_for [@gamesession] do |f| %>
       <%= f.input :name, required: true %>
       <%= f.input :game_id, required: true, as: :radio_buttons, collection: [['1', 'Commander'], ['2', 'Brawl']], label_method: :second, value_method: :first  %>
-      <%= f.input :start_time, required: true %>
-      <%= f.input :end_time, required: true %>
+      <%= f.input :start_time,required: true, minute_step: 30  %>
+      <%= f.input :end_time, minute_step: 30  %>
       <%= f.input :min_players, required: true, label: 'Min players (2)', input_html: { value: "2" }%>
       <%= f.input :max_players, required: true, label:'Max players (10)'%>
       <%= f.input :description %>

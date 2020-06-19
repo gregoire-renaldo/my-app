@@ -41,6 +41,7 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     @gamesession = @player.game_session
     @player.destroy
+    flash[:notice] = "You have successfully quit the gamesession."
     redirect_to game_session_path(@gamesession)
   end
 

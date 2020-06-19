@@ -6,24 +6,25 @@
   <p>game session id: <%= @gamesession.id %></p>
   <p>created by: <%= @gamesession.user.username %></p>
   <p>description: <%= @gamesession.description %></p>
-  <p>start_time: <%= @gamesession.start_time %></p>
-  <p>end_time: <%= @gamesession.end_time %></p>
+  <p>start_time: <%= @gamesession.start_time.strftime("%k:%M") %></p>
+  <p>end_time: <%= @gamesession.end_time.strftime("%k:%M") %></p>
   <p>min_player: <%= @gamesession.min_players %></p>
   <p>max_player: <%= @gamesession.max_players %></p>
   <p>Players: <% @gamesession.players.each do |player| %>
              <%= "#{player.user.username} &" %>
-             <% @player = player %>
+             <% @player = player  %>
              <% end %>
+             <p class="btn-dark" >button add an address, formulaire deroulannt, create an new address </p>
   <ul>
     <%# join game session, only if user hasn't already joined %>
-    <% if @player.user_id != current_user.id%>
+    <% if @player.user_id != current_user.id %>
     <li><%= link_to 'Join the game', new_game_session_player_path(@gamesession) %></li>
     <% end %>
     <%# cancel participation, display only if user participate %>
     <% @gamesession.players.each do |player| %>
     <% @player = player %>
       <% if @player.user_id == current_user.id%>
-      <li><%= link_to "Cancel your participation ? (#{@player.id})",
+      <li><%= link_to "Cancel your participation ? (#{@player.user.username})",
             player_path(@player),
             method: :delete,
             data: { confirm: "Are you sure?" } %> </li>

@@ -10,7 +10,7 @@
     <p>end_time: <%= gamesession.end_time.strftime("%H:%M") %> </p>
     <p>min_player: <%= gamesession.min_players %> </p>
     <p>max_player: <%= gamesession.max_players %> </p>
-        <p>players <% gamesession.players.each do |player| %>
+        <p>playersss <% gamesession.players.each do |player| %>
         <%=  player.user.username%>
         <% #ajouter link_to player_show %>
         <% end %> </p>

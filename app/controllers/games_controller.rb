@@ -6,6 +6,7 @@ end
 
 
 def new
+  #use for futur admin
   @game = Game.new
 end
 

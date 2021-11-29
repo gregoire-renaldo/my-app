@@ -1,0 +1,10 @@
+simple_form_for
+
+<div>
+      <%= simple_form_for [@game] do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.input :description %>
+      <%= f.submit "Create a Game ", class: "btn btn-dark" %>
+      <%= link_to "Cancel", games_path, class: "btn btn-dark" %>
+      <% end %>
+    </div>

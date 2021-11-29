@@ -2,15 +2,16 @@
 <p>Find me in app/views/game_sessions/index.html.erb</p>
 <% @gamesessions.sort_by(&:start_time).each do |gamesession| %>
     <%= link_to game_session_path(gamesession) do %>
-    <p> <h2>title: <%=gamesession.name %></h2>  </p>
+    <h2>title: <%=gamesession.name %></h2>
     <%end %>
-    <p>created by: <%= gamesession.user.username %> </p>
+    <p>created by:<%= gamesession.user.username %> </p>
     <p>description: <%= gamesession.description %> </p>
-    <p>start_time: <%= gamesession.start_time.strftime("%H:%M") %> </p>
-    <p>end_time: <%= gamesession.end_time.strftime("%H:%M") %> </p>
+    <p>start_time: <%= gamesession.start_time.strftime("%d/%m/%Y %H:%M") %> </p>
+    <p>end_time: <%= gamesession.end_time.strftime("%d/%m/%Y %H:%M") %> </p>
     <p>min_player: <%= gamesession.min_players %> </p>
     <p>max_player: <%= gamesession.max_players %> </p>
-        <p>playssersss <% gamesession.players.each do |player| %>
+
+        <p>Players (<%= gamesession.players.count%>) <% gamesession.players.each do |player| %>
         <%=  player.user.username%>
         <% #ajouter link_to player_show %>
         <% end %> </p>
